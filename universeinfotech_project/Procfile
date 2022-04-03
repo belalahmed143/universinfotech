@@ -1,0 +1,1 @@
+web: gunicorn universeinfotech_project.wsgi --log-file -

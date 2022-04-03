@@ -1,0 +1,15 @@
+<section >
+    <div class="Mysliders">
+        
+        {% for bs in banner_sliders %}
+        <div class="single-slider">
+            <img src="{{ bs.image.url }}" alt="">
+            <div class="slider-content">
+                <h4>{{ bs.title }}</h4>
+                <p>{{ bs.description }}</p>
+                <a href="">read more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
