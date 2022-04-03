@@ -5,6 +5,7 @@ admin.site.register(Banner_Slider)
 admin.site.register(ClientsReview)
 admin.site.register(Tools)
 admin.site.register(Portfolio)
+admin.site.register(Our_Client)
 
 
 class FeatureAdmin(admin.ModelAdmin):

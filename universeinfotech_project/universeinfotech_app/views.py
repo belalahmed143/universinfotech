@@ -8,7 +8,7 @@ def index(request):
     services_part_1 = Our_Service.objects.all()[:2]
     services = Our_Service.objects.all()[2:6]
     project_gallery = Project_Gallery.objects.all()
-    clients =ClientsReview.objects.all()
+    clientsreview =ClientsReview.objects.all()
     tools = Tools.objects.all()
 
     context={
@@ -17,7 +17,7 @@ def index(request):
         'services':services,
         'services_part_1':services_part_1,
         'project_gallery':project_gallery,
-        'clients':clients,
+        'clientsreview':clientsreview,
         'tools':tools
     }
     return render(request, 'index.html',context)
@@ -30,6 +30,13 @@ def FeatureDetails(request,slug):
     }
     return render(request, 'featuredetail.html',context)
 
+def service(request):
+    services = Our_Service.objects.all()
+    context={
+        'services':services
+    }
+    return render(request, 'service.html', context)
+
 def ServiceDetails(request,slug):
     services = Our_Service.objects.get(slug=slug)
 
@@ -38,6 +45,13 @@ def ServiceDetails(request,slug):
     }
     return render(request, 'servicesdetail.html',context)
 
+def blog(request):
+    blogs = Blog.objects.all()
+
+    context ={
+        'blogs':blogs
+    }
+    return render(request, 'blog.html',context)
 
 def BlogDetails(request,slug):
     blogs = Blog.objects.get(slug=slug)
@@ -50,7 +64,6 @@ def BlogDetails(request,slug):
     return render(request, 'blogdetail.html',context)
 
 
-
 def developer_team(request):
     developer_profile = Developer_Profile.objects.all()
 
@@ -59,13 +72,13 @@ def developer_team(request):
     }
     return render(request, 'developer_team.html',context)
 
-def blog(request):
-    blogs = Blog.objects.all()
+def client(request):
+    clients = Our_Client.objects.all()
 
-    context ={
-        'blogs':blogs
+    context={
+        'clients':clients
     }
-    return render(request, 'blog.html',context)
+    return render(request, 'clients.html',context)
 
 def about(request):
     return render(request, 'about.html')
@@ -78,3 +91,5 @@ def portfolio(request):
     }
     return render(request, 'portfolio.html', context)
 
+def history(request):
+    return render(request, 'history.html')

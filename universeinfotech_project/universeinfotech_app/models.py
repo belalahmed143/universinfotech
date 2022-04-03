@@ -63,6 +63,13 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
+class Our_Client(models.Model):
+    name = models.CharField(max_length = 150)
+    image = models.ImageField(upload_to='ClientsImg')
+    
+    def __str__(self):
+        return self.name
+
 class ClientsReview(models.Model):
     name = models.CharField(max_length = 150)
     image = models.ImageField(upload_to='ClientsImg')
