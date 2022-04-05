@@ -95,4 +95,72 @@ class Portfolio(models.Model):
     
     def __str__(self):
         return self.tilte
+
+class Career(models.Model):
+    title = models.CharField(max_length = 150)
+    slug = models.SlugField(max_length = 50)
+    active_status = models.BooleanField(default=True)
+    job_description =RichTextUploadingField()
+    job_requirement =RichTextUploadingField()
+    educational_eequirements =RichTextUploadingField()
+    compensation_other_benefits =RichTextUploadingField()
+    experience = models.CharField(max_length = 150) 
+    salary = models.CharField(max_length = 150)
+    date = models.DateField(auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.title    
+    
+    
+class JobApplication(models.Model):
+    full_name= models.CharField(max_length = 150)
+    email = models.EmailField()
+    phone= models.CharField(max_length = 150)
+    expected_salary= models.CharField(max_length = 150)
+    cv= models.FileField(upload_to='ApplicationCV')
+    message = models.TextField()
+    
+    def __str__(self):
+        return self.email
+
+
+
+class News_and_Evenet(models.Model):
+    title = models.CharField(max_length = 150)
+    image = models.ImageField(upload_to='NewsAndEvenetImage')
+    description =RichTextUploadingField()
+    
+    def __str__(self):
+        return self.title
+
+class Notice(models.Model):
+    title = models.CharField(max_length = 150)
+    image = models.ImageField(upload_to='NewsAndEvenetImage')
+    description =RichTextUploadingField()
+    
+    def __str__(self):
+        return self.title
+
+class MissionVission(models.Model):
+    Object_type =(
+        ('mission','mission'),
+        ('vission','vission')
+    )
+    title = models.CharField(max_length = 150)
+    object_type = models.CharField(max_length = 150, choices=Object_type)
+    image = models.ImageField(upload_to='MissionVissionImg')
+    description =RichTextUploadingField()
+    
+    def __str__(self):
+        return self.title
+
+class IT_Profile(models.Model):
+    title = models.CharField(max_length = 150)
+    it_profile_file= models.FileField(upload_to='ItProfileFile')
+
+    def __str__(self):
+        return self.title
+    
+
+    
     

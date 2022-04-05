@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import *
+from .forms import *
+from django.contrib import messages
+from django.shortcuts import redirect
 # Create your views here.
 
 def index(request):
@@ -21,6 +24,13 @@ def index(request):
         'tools':tools
     }
     return render(request, 'index.html',context)
+
+def feature(request):
+    features = Feature.objects.all()
+    context={
+        'features':features
+    }
+    return render(request, 'feature.html', context)
 
 def FeatureDetails(request,slug):
     features = Feature.objects.get(slug=slug)
@@ -93,3 +103,67 @@ def portfolio(request):
 
 def history(request):
     return render(request, 'history.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
+
+def career(request):
+    careers = Career.objects.filter(active_status=True)
+
+    context={
+        'careers':careers
+    }
+    return render(request, 'career.html',context)
+
+def careerdetails(request,slug):
+    careers =Career.objects.get(slug=slug)
+    form =JobApplicationForm()
+    if request.method == 'POST':
+        form =JobApplicationForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Submit Your Application')
+            return redirect('career-detail', slug=slug)
+    context={
+        'careers':careers,
+        'form':form
+    }
+    return render(request, 'careerdetails.html',context)
+
+def news_and_evenet(request):
+    news_and_evenets = News_and_Evenet.objects.last()
+
+    context={
+        'news_and_evenets':news_and_evenets,
+    }
+
+    return render(request, 'news_and_evenet.html', context)
+
+def notice(request):
+    notice = Notice.objects.last()
+
+    context={
+        'notice':notice,
+    }
+
+    return render(request, 'notice.html', context)
+
+def mission_and_vission(request):
+    mission = MissionVission.objects.filter(object_type='mission').last()
+    vission = MissionVission.objects.filter(object_type='vission').last()
+    context={
+        'mission':mission,
+        'vission':vission,
+    }
+
+    return render(request, 'mission_and_vission.html', context)
+
+def it_profile(request):
+    notice = IT_Profile.objects.last()
+
+    context={
+        'notice':notice,
+    }
+
+    return render(request, 'notice.html', context)

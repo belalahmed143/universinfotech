@@ -1,4 +1,6 @@
 {% load static %}
+{% load service %}
+{% load itprofile %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +22,28 @@
 
 	
 	{% block head %}
-		
+	
 	{% endblock head %}
-		
+		<style>
+			#it-nw-main-navigation ul li a{
+				padding: 10px;
+				font-size: 18px;
+				font-weight: 700;
+				color: #00036c;
+			}
+			#it-nw-main-navigation ul li a:hover{
+				color:#4c6df3;
+			}
+			#it-nw-main-navigation ul li .active{
+				color:#4c6df3;
+			}
+			@media screen and (max-width: 450px) {
+			.Mysliders h4 {
+				padding-top: 30px;
+				font-size: 18px;
+			}
+		}
+		</style>
 </head>
 
 <body class="it-nw" data-spy="scroll" data-target=".it-nw-main-navigation" data-offset="80">
@@ -72,8 +93,17 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="it-nw-fooer-widget headline pera-content ul-li-block">
 								<div class="it-nw-logo-widget">
-									<a href="#"><img src="static/assets/img/its-2/logo/logo1.png" alt=""></a>
-									<p>Trust, Co-operative, Clients satisfaction, Love, more care about your products is our main goal./p>
+									<a href="#"><img src="{% static 'assets/img/its-2/logo/logo1.png' %}" alt=""></a>
+									<div class="it-nw-fooer-widget headline pera-content ul-li-block">
+										<div class="it-nw-contact-widget">
+											<ul>
+												<li><i class="fas fa-phone"></i> <span> +01760636935 </span>  </li>
+												<li><i class="fas fa-envelope"></i> <span> universeinfotechbd@gmail.com  </span> </li>
+												<li><i class="fas fa-map-marker-alt"></i> <span> L-4, H-59, Road 3,
+													Block- G (near by Rampura thana), Banasree, Dhaka </span></li>
+											</ul>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -82,11 +112,14 @@
 								<div class="it-nw-fooer-menu">
 									<h3 class="widget-title">Quick link</h3>
 									<ul> 
-										<li><a href="#">Home</a></li>
-										<li><a href="#">Services</a></li>
-										<li><a href="#">About us</a></li>
-										<li><a href="#">Testimonials</a></li>
-										<li><a href="#">News</a></li>
+										<li><a href="{% url 'home' %}" target="_blank">Home</a></li>
+										<li><a href="{% url 'about' %}"target="_blank">About us</a></li>
+										{% for p in request|itprofile  %}
+										<li><a href="{{ p.it_profile_file.url }}" download="">Profile</a></li>			
+										{% endfor %}						
+										<li><a href="{% url 'news-and-evenet' %}"target="_blank">News & Event</a></li>
+										<li><a href="{% url 'notice' %}"target="_blank">Notice</a></li>
+										<li><a href="{% url 'mission-and-vission' %}"target="_blank">Mission & Vission</a></li>
 									</ul>
 								</div>
 							</div>
@@ -96,11 +129,12 @@
 								<div class="it-nw-fooer-menu">
 									<h3 class="widget-title">Products</h3>
 									<ul> 
-										<li><a href="#">Features</a></li>
+										<li><a href="{% url 'feature' %}" target="_blank">Features</a></li>
 										<li><a href="#">Pricing</a></li>
-										<li><a href="#">News</a></li>
+										<li><a href="#">Message</a></li>
 										<li><a href="#">Help desk</a></li>
 										<li><a href="#">Support</a></li>
+										<li><a href="#">Paymentn get ways</a></li>
 									</ul>
 								</div>
 							</div>
@@ -108,13 +142,12 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="it-nw-fooer-widget headline pera-content ul-li-block">
 								<div class="it-nw-contact-widget">
-									<h3 class="widget-title">Contact info</h3>
-									<ul>
-										<li><i class="fas fa-phone"></i> <span> +01760636935 </span>  </li>
-										<li><i class="fas fa-envelope"></i> <span> universeinfotechbd@gmail.com  </span> </li>
-										<li><i class="fas fa-map-marker-alt"></i> <span> L-4, H-59, Road 3,
-											Block- G (near by Rampura thana), Banasree, Dhaka </span></li>
-									</ul>
+									<h3 class="widget-title">Our Service</h3>
+									<ul>											
+										{% for s in request|service %}
+											<li><a href="{% url 'service-detail' s.slug %}">{{ s.title }}</a></li>	
+										{% endfor %}
+										</ul>
 								</div>
 							</div>
 						</div>

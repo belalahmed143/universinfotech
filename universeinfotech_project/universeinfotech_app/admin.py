@@ -6,6 +6,15 @@ admin.site.register(ClientsReview)
 admin.site.register(Tools)
 admin.site.register(Portfolio)
 admin.site.register(Our_Client)
+admin.site.register(News_and_Evenet)
+admin.site.register(Notice)
+admin.site.register(MissionVission)
+admin.site.register(IT_Profile)
+
+
+class CareerAdmin(admin.ModelAdmin):
+    prepopulated_fields ={'slug': ('title',)}
+admin.site.register(Career,CareerAdmin)
 
 
 class FeatureAdmin(admin.ModelAdmin):
