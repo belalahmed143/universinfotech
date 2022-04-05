@@ -36,10 +36,10 @@ def FeatureDetails(request,slug):
     features = Feature.objects.get(slug=slug)
 
     context={
-        'services':services,
+        'features':features,
     }
     return render(request, 'featuredetail.html',context)
-
+    
 def service(request):
     services = Our_Service.objects.all()
     context={
